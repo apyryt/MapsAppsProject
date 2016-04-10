@@ -1,5 +1,6 @@
 package apyryt.mapsappsproject;
 
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -10,6 +11,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     private Button addActivity;
     private EditText titleText, descriptionText;
+
+    public static String eventDescr;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -27,6 +30,19 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     @Override
     public void onClick(View v) {
+        switch (v.getId()) {
+            case R.id.addEventButton:
 
+                //Maps intent
+                Intent maps = new Intent(this, MapsActivity.class);
+
+                //gets the info of the title and description to be created in the marker
+                String msg = titleText.getText().toString() + ";" + descriptionText.getText().toString();
+                maps.putExtra(eventDescr, msg);
+
+                //add a new marker with the information of the new event
+                startActivity(maps);
+                break;
+        }
     }
 }

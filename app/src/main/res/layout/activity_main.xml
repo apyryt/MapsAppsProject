@@ -45,8 +45,10 @@
         android:layout_height="wrap_content"
         android:id="@+id/titleEditText"
         android:layout_above="@+id/textView3"
-        android:layout_toRightOf="@+id/textView3"
-        android:layout_toEndOf="@+id/textView3" />
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true"
+        android:layout_alignLeft="@+id/descriptionEditText"
+        android:layout_alignStart="@+id/descriptionEditText" />
 
     <EditText
         android:layout_width="wrap_content"
@@ -55,8 +57,10 @@
         android:ems="10"
         android:id="@+id/descriptionEditText"
         android:layout_alignBottom="@+id/textView3"
-        android:layout_toRightOf="@+id/titleEditText"
-        android:layout_toEndOf="@+id/titleEditText" />
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true"
+        android:layout_alignLeft="@+id/addEventButton"
+        android:layout_alignStart="@+id/addEventButton" />
 
     <Button
         android:layout_width="wrap_content"

@@ -1,6 +1,7 @@
 package apyryt.mapsappsproject;
 
 import android.Manifest;
+import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.location.Location;
 import android.location.LocationListener;
@@ -68,13 +69,30 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         //adds a button to let the user go to their current location
         mMap.setMyLocationEnabled(true);
 
+        //gets the intent from the first activity
+        Intent firstActivityIntent = getIntent();
+
+        //event Data passed in as "title;description" -- with ; seperating the two values
+        String eventData[] = firstActivityIntent.getStringExtra(MainActivity.eventDescr).split("\\;");
+
+        displayPlacePicker();
+
+        //creates a marker based on the data entered by the user
+        //TODO: how to set the location of the marker
+        LatLng temp = new LatLng(39.3551, -76.7112);
+        mMap.addMarker(new MarkerOptions()
+                .position(temp)
+                .title(eventData[0])
+                .snippet(eventData[1]));
+
+
 
         // Add a marker at UMBC
-        LatLng umbc = new LatLng(39.2551, -76.7112);
-        mMap.addMarker(new MarkerOptions()
-                .position(umbc)
-                .title("UMBC")
-                .snippet("An Honors University in Maryland"));
+  //      LatLng umbc = new LatLng(39.2551, -76.7112);
+  //      mMap.addMarker(new MarkerOptions()
+  //              .position(umbc)
+  //              .title("UMBC")
+  //              .snippet("An Honors University in Maryland"));
 
         //starts the camera at the user's current position
         location = locationManager_.getLastKnownLocation(LocationManager.NETWORK_PROVIDER);
@@ -85,38 +103,35 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
     //TODO:
     // do something when the marker is clicked on
-    // dynamically add markers in the app
+    //save existing markers in a text file
 
+
+  //  @Override
+  //  public boolean onMarkerClick(Marker marker) {
+        //marker.showInfoWindow();
+  //     return true;
+  //  }
+
+
+    //uses google places data to pick a location for the event
+    private void displayPlacePicker() {
+
+    }
+
+    @Override
+    public void onLocationChanged(Location location) {    }
+
+    @Override
+    public void onStatusChanged(String provider, int status, Bundle extras) {    }
+
+    @Override
+    public void onProviderEnabled(String provider) {    }
+
+    @Override
+    public void onProviderDisabled(String provider) {    }
 
     @Override
     public boolean onMarkerClick(Marker marker) {
-        marker.showInfoWindow();
-        return true;
-    }
-
-    @Override
-    public void onLocationChanged(Location location) {
-        //    if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
-        //        return;
-        //    }
-        //    location = locationManager_.getLastKnownLocation(LocationManager.NETWORK_PROVIDER);
-        ///    latitude = location.getLatitude();
-        //    longitude = location.getLongitude();
-        //    mMap.moveCamera(CameraUpdateFactory.newLatLng(new LatLng(latitude, longitude)));
-    }
-
-    @Override
-    public void onStatusChanged(String provider, int status, Bundle extras) {
-
-    }
-
-    @Override
-    public void onProviderEnabled(String provider) {
-
-    }
-
-    @Override
-    public void onProviderDisabled(String provider) {
-
+        return false;
     }
 }
